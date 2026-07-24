@@ -16,7 +16,7 @@ public class TimeRequest {
      */
     @NotNull(message = "小时不能为空")
     @Min(value = 0, message = "小时必须大于等于0")
-    @Max(value = 4, message = "小时必须小于等于4")
+    @Max(value = 23, message = "小时必须小于等于23")
     private Integer hours;
     
     /**
