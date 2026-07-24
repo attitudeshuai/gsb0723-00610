@@ -16,7 +16,7 @@ public class PaceRequest {
      */
     @NotNull(message = "配速分钟不能为空")
     @Min(value = 2, message = "配速分钟必须大于等于2")
-    @Max(value = 5, message = "配速分钟必须小于等于5")
+    @Max(value = 20, message = "配速分钟必须小于等于20")
     private Integer paceMinutes;
     
     /**

@@ -17,13 +17,13 @@ public class PaceCalculatorService {
      */
     public CalculationResponse calculatePaceFromTime(TimeRequest request) {
         DistanceType distanceType = request.getDistanceType();
-        double distance = request.getDistanceType().getKilometers(); // 使用标准距离，忽略自定义距离
+        double distance = request.getActualDistance(); // 使用实际距离（自定义或默认）
         int totalSeconds = request.getTotalSeconds();
         
-        // 计算每公里配速（秒）
+        // 计算每公里配速（秒），带小数秒时向下取整，避免配速被高估
         double pacePerKm = (double) totalSeconds / distance;
         int paceMinutes = (int) (pacePerKm / 60);
-        int paceSeconds = (int) Math.ceil(pacePerKm % 60);
+        int paceSeconds = (int) (pacePerKm % 60);
         
         return CalculationResponse.builder()
                 .distanceType(distanceType.getDescription())
@@ -54,8 +54,8 @@ public class PaceCalculatorService {
         double distance = request.getActualDistance(); // 使用实际距离（自定义或默认）
         int paceInSeconds = request.getPaceInSeconds();
         
-        // 计算总完赛时间（秒）
-        int totalSeconds = (int) Math.ceil(paceInSeconds * distance);
+        // 计算总完赛时间（秒），带小数秒时向下取整，避免完赛时间被多算 1 秒
+        int totalSeconds = (int) (paceInSeconds * distance);
         int hours = totalSeconds / 3600;
         int minutes = (totalSeconds % 3600) / 60;
         int seconds = totalSeconds % 60;
