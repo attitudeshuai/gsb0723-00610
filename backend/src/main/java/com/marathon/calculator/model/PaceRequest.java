@@ -12,11 +12,11 @@ import lombok.Data;
 public class PaceRequest {
     
     /**
-     * 配速-分钟 (2-20)
+     * 配速-分钟 (2-30)
      */
     @NotNull(message = "配速分钟不能为空")
     @Min(value = 2, message = "配速分钟必须大于等于2")
-    @Max(value = 5, message = "配速分钟必须小于等于5")
+    @Max(value = 30, message = "配速分钟必须小于等于30")
     private Integer paceMinutes;
     
     /**
